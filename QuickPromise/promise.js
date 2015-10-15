@@ -7,6 +7,15 @@
 /* JavaScript implementation of promise object
  */
 
+
+function setTimeout(callback, timeout) {
+    var component = Qt.createComponent("SetTimeoutTimer.qml");
+    var timer = component.createObject(null, { interval: timeout });
+    timer.triggered.connect(callback);
+    timer.running = true;
+    return timer;
+}
+
 function Promise() {
 
     this.state = "pending";
@@ -175,7 +184,7 @@ Promise.prototype.resolve = function(value) {
 Promise.prototype._resolveInTick = function(value) {
     var promise = this;
 
-    QP.QPTimer.setTimeout(function() {
+    setTimeout(function() {
         if (promise.state !== "pending")
             return;
 
@@ -208,7 +217,7 @@ Promise.prototype.reject = function(reason) {
         return;
     }
 
-    QP.QPTimer.setTimeout(function() {
+    setTimeout(function() {
         if (promise.state !== "pending")
             return;
 
