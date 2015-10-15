@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.4
 import "promise.js" as PromiseJS
 import "combinator.js" as Combinator
 import QuickPromise 1.0
